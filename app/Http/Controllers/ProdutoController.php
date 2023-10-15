@@ -3,62 +3,79 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\ProdutoModel;
+use App\Models\CategoriaModel;
+use App\Models\ArmazemModel;
 
-class ProdutoController extends Controller
-{
+class ProdutoController extends Controller {
+    private $objProd;
+    private $objCat;
+    private $objArm;
+
+    public function __construct() {
+        $this->objProd = new ProdutoModel();
+        $this->objCat = new CategoriaModel();
+        $this->objArm = new ArmazemModel();
+    }
+
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        //
+    public function index() {
+        $produtos = $this->objProd->all();
+        return view('produtos.index', compact('produtos'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        //
+    public function create() {
+        $categorias = $this->objCat->all();
+        $armazens = $this->objArm->all();
+        return view('produtos.create', compact('categorias', 'armazens'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $request) {
+        $date = $this->objProd->create([
+            'desc' => $request->desc,
+            'custo'=>$request->custo,
+            'qtd' => $request->qtd,
+            'id_cat' => $request->categoria,
+            'id_arm' => $request->armazem
+        ]);
+        if($date){
+            return redirect('produtos');
+        }
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
-    {
+    public function show(string $id) {
         //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
-    {
+    public function edit(string $id) {
         //
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
+    public function update(Request $request, string $id) {
         //
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
-    {
+    public function destroy(string $id) {
         //
     }
 }
