@@ -20,7 +20,8 @@ class FuncionarioController extends Controller {
      */
     public function index() {
         $funcionarios = $this->objFunc->all();
-        return view('funcionarios.index', compact('funcionarios'));
+        $empresas = $this->objEmp->all();
+        return view('funcionarios.index', compact('funcionarios','empresas'));
     }
 
     /**
@@ -64,7 +65,13 @@ class FuncionarioController extends Controller {
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id) {
-        //
+        $this->objFunc->where(['id'=>$id])->update([
+            'nome' => $request->nome,
+            'id_emp'=>$request->emp,
+            'cargo' => $request->cargo,
+            'nivel' => $request->nivel
+        ]);
+        return redirect("funcionarios");
     }
 
     /**

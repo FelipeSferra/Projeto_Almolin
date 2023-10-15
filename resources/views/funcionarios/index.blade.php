@@ -23,22 +23,45 @@
         </thead>
         <tbody>
         @foreach($funcionarios as $funcionario)
-            @php
-                $empresa = $funcionario->find($funcionario->id)->relEmpFunc;
-            @endphp
-            <tr>
-                <td>{{$funcionario->id}}</td>
-                <td>{{$funcionario->nome}}</td>
-                <td>{{$empresa->desc}}</td>
-                <td>{{$funcionario->cargo}}</td>
-                <td>{{$funcionario->nivel}}</td>
-                <td>
-                    <div class="text-end">
-                        <a class="btn btn-outline-secondary mx-1" href="{{url("funcionarios/$funcionario->id")}}" role="button"><i class="fa-light fa-eye fa-sm"></i> Visualizar</a>
-                        <a class="btn btn-outline-primary mx-2" href="{{url("funcionarios/$funcionario->id/edit")}}" role="button"><i class="fa-light fa-pen-to-square fa-sm"></i> Editar</a>
-                    </div>
-                </td>
-            </tr>
+            <form name="formEdtFunc" method="post" action="{{url("funcionarios/$funcionario->id")}}">
+                @method("PUT")
+                @csrf
+                <tr>
+                    <td>{{$funcionario->id}}</td>
+                    <td>
+                        <input type="text" id="nome" name="nome" class="form-control" value="{{$funcionario->nome}}"
+                               onclick="show_btn({{$funcionario->id}})">
+                    </td>
+                    <td>
+                        <select id="emp" name="emp" class="form-select"
+                                onclick="show_btn({{$funcionario->id}})">
+                            @foreach($empresas as $empresa)
+                                <option
+                                    value="{{$empresa->id}}" {{$empresa->id === $funcionario->id_emp ? "selected" : ""}}>{{$empresa->desc}}</option>
+                            @endforeach
+                        </select>
+                    </td>
+                    <td>
+                        <input type="text" id="cargo" name="cargo" class="form-control" value="{{$funcionario->cargo}}"
+                               onclick="show_btn({{$funcionario->id}})">
+                    </td>
+                    <td>
+                        <input type="number" id="nivel" name="nivel" class="form-control"
+                               value="{{$funcionario->nivel}}"
+                               onclick="show_btn({{$funcionario->id}})">
+                    </td>
+                    <td>
+                        <div class="text-end">
+                            <button type="submit" class="btn btn-outline-success mx-2" id="{{$funcionario->id}}"
+                                    disabled><i
+                                    class="fa-light fa-pen-to-square fa-sm"></i> Editar
+                            </button>
+                            <a class="btn btn-outline-danger mx-1" href="#"
+                               role="button"><i class="fa-light fa-trash fa-sm"></i> Remover</a>
+                        </div>
+                    </td>
+                </tr>
+            </form>
         @endforeach
         </tbody>
     </table>

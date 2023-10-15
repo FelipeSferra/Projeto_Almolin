@@ -35,10 +35,10 @@
                     <a class="nav-link" href="{{url("produtos")}}">Produtos</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{url("funcionarios")}}"">Funcionarios</a>
+                    <a class="nav-link" href="{{url("funcionarios")}}">Funcionarios</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Categorias</a>
+                    <a class="nav-link" href="{{url("categorias")}}">Categorias</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Local de estoque</a>
@@ -67,5 +67,6 @@
 <div class="max-width">
     @yield('content')
 </div>
+<script src="{{url("assets/js/script.js")}}"></script>
 </body>
 </html>

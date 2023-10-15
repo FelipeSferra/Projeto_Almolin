@@ -20,16 +20,27 @@
         </thead>
         <tbody>
         @foreach($categorias as $categoria)
-            <tr>
-                <td>{{$categoria->id}}</td>
-                <td>{{$categoria->desc}}</td>
-                <td>
-                    <div class="text-end">
-                        <a class="btn btn-outline-secondary mx-1" href="{{url("categorias/$categoria->id")}}" role="button"><i class="fa-light fa-eye fa-sm"></i> Visualizar</a>
-                        <a class="btn btn-outline-primary mx-2" href="{{url("categorias/$categoria->id/edit")}}" role="button"><i class="fa-light fa-pen-to-square fa-sm"></i> Editar</a>
-                    </div>
-                </td>
-            </tr>
+            <form name="formEdtCat" method="post" action="{{url("categorias/$categoria->id")}}">
+                @method("PUT")
+                @csrf
+                <tr>
+                    <td>{{$categoria->id}}</td>
+                    <td>
+                        <input type="text" id="descr" name="descr" class="form-control" value="{{$categoria->desc}}"
+                               onclick="show_btn({{$categoria->id}})">
+                    </td>
+                    <td>
+                        <div class="text-end">
+                            <button type="submit" class="btn btn-outline-success mx-2" id="{{$categoria->id}}"
+                                    disabled><i
+                                    class="fa-light fa-pen-to-square fa-sm"></i> Editar
+                            </button>
+                            <a class="btn btn-outline-danger mx-1" href="#"
+                               role="button"><i class="fa-light fa-trash fa-sm"></i> Remover</a>
+                        </div>
+                    </td>
+                </tr>
+            </form>
         @endforeach
         </tbody>
     </table>

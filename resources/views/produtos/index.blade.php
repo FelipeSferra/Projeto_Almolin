@@ -27,19 +27,20 @@
         </thead>
         <tbody>
         @foreach($produtos as $produto)
-
             <form name="formEdtProd" method="post" action="{{url("produtos/$produto->id")}}">
                 @method("PUT")
                 @csrf
                 <tr>
-
                     <td>{{$produto->id}}</td>
-                    <td><input id="desc" name="desc" class="form-control" value="{{$produto->desc}}"
+                    <td><input type="text" id="desc" name="desc" class="form-control" value="{{$produto->desc}}"
                                onclick="show_btn({{$produto->id}})"></td>
-                    <td><input id="custo" name="custo" class="form-control" value="{{$produto->custo}}" onclick="show_btn({{$produto->id}})"></td>
-                    <td><input id="qtd" name="qtd" class="form-control" value="{{$produto->qtd}}" onclick="show_btn({{$produto->id}})"></td>
+                    <td><input type="number" id="custo" name="custo" step="0.01" class="form-control"
+                               value="{{$produto->custo}}" onclick="show_btn({{$produto->id}})"></td>
+                    <td><input type="number" id="qtd" name="qtd" class="form-control" value="{{$produto->qtd}}"
+                               onclick="show_btn({{$produto->id}})"></td>
                     <td>
-                        <select id="categoria" name="categoria" class="form-select" onclick="show_btn({{$produto->id}})">
+                        <select id="categoria" name="categoria" class="form-select"
+                                onclick="show_btn({{$produto->id}})">
                             @foreach($categorias as $categoria)
                                 <option
                                     value="{{$categoria->id}}" {{$categoria->id === $produto->id_cat ? "selected" : ""}}>{{$categoria->desc}}</option>
@@ -59,7 +60,7 @@
                             <button type="submit" class="btn btn-outline-success mx-2" id="{{$produto->id}}" disabled><i
                                     class="fa-light fa-pen-to-square fa-sm"></i> Editar
                             </button>
-                            <a class="btn btn-outline-danger mx-1" href="{{url("produtos/$produto->id")}}"
+                            <a class="btn btn-outline-danger mx-1" href="#"
                                role="button"><i class="fa-light fa-trash fa-sm"></i> Remover</a>
                         </div>
                     </td>
@@ -69,17 +70,3 @@
         </tbody>
     </table>
 @endsection
-<script>
-    function show_btn(id) {
-        let Ant = document.querySelectorAll('.enable');
-        Ant.forEach(function (btnAnt){
-            btnAnt.classList.remove('enable');
-            btnAnt.setAttribute('disabled', '');
-        })
-
-        let btn = document.getElementById(id);
-        btn.classList.add('enable');
-        btn.removeAttribute('disabled');
-    }
-
-</script>
