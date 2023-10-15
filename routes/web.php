@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\FuncionarioController;
 use App\Http\Controllers\ProdutoController;
+use App\Http\Controllers\CategoriaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,4 +22,12 @@ Route::get('/', function () {
 
 Route::resources([
     '/produtos'=>ProdutoController::class,
+    ]);
+
+Route::resources([
+    '/funcionarios'=>FuncionarioController::class,
+    ]);
+
+Route::resources([
+    '/categorias'=>CategoriaController::class,
     ]);

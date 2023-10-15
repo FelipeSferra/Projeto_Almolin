@@ -39,7 +39,7 @@
 
         .buttonMenu {
             text-decoration: none;
-            color: #000;
+            color: #fff;
             text-align: center;
             width: 80%;
             background-color: #FF7E39;
@@ -49,6 +49,7 @@
             font-size: 28px;
             font-weight: 500;
             font-family: 'Roboto', sans-serif;
+            margin-top: 10px;
         }
     </style>
 </head>
@@ -56,7 +57,9 @@
     <section>
         <div class="areaMenu">
             <h1 class="titleMenu">ALMOLIN</h1>
-            <a href="{{url("produtos")}}" class="buttonMenu">Produtos</a>
+            <a href="{{url('produtos')}}" class="buttonMenu">Produtos</a>
+            <a href="{{url('funcionarios')}}" class="buttonMenu" style="background-color: #004ADF">Funcionarios</a>
+            <a href="{{url('categorias')}}" class="buttonMenu" style="background-color: #950700">Categorias</a>
         </div>
     </section>
 </body>

@@ -35,7 +35,7 @@
                     <a class="nav-link" href="{{url("produtos")}}">Produtos</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Funcionarios</a>
+                    <a class="nav-link" href="{{url("funcionarios")}}"">Funcionarios</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Categorias</a>
