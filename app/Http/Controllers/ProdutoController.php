@@ -23,7 +23,9 @@ class ProdutoController extends Controller {
      */
     public function index() {
         $produtos = $this->objProd->all();
-        return view('produtos.index', compact('produtos'));
+        $categorias = $this->objCat->all();
+        $armazens = $this->objArm->all();
+        return view('produtos.index', compact('produtos','categorias','armazens'));
     }
 
     /**
@@ -69,7 +71,14 @@ class ProdutoController extends Controller {
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id) {
-        //
+        $this->objProd->where(['id' => $id])->update([
+            'desc' => $request->desc,
+            'custo'=>$request->custo,
+            'qtd' => $request->qtd,
+            'id_cat' => $request->categoria,
+            'id_arm' => $request->armazem
+        ]);
+        return redirect("produtos");
     }
 
     /**

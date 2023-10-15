@@ -16,8 +16,8 @@
             <th scope="col">ID</th>
             <th scope="col">Nome</th>
             <th scope="col">Empresa</th>
-            <th scope="col">cargo</th>
-            <th scope="col">nivel</th>
+            <th scope="col">Cargo</th>
+            <th scope="col">Nível</th>
             <th class="col-3"></th>
         </tr>
         </thead>
