@@ -35,11 +35,11 @@ class EmpresaController extends Controller {
      * Store a newly created resource in storage.
      */
     public function store(Request $request) {
-        $date = $this->objEmp->create([
+        $data = $this->objEmp->create([
             'cidade' => $request->cidade,
             'desc' => $request->descr,
         ]);
-        if($date){
+        if($data){
             return redirect('empresas');
         }
     }
@@ -62,7 +62,11 @@ class EmpresaController extends Controller {
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id) {
-        //
+        $this->objEmp->where(['id'=>$id])->update([
+            'cidade' => $request->cidade,
+            'desc' => $request->descr,
+        ]);
+        return redirect('empresas');
     }
 
     /**

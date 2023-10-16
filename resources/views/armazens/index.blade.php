@@ -6,7 +6,7 @@
     <h2>Armazens</h2>
     <hr>
     <div class="col-md-2 mb-2">
-        <a class="btn btn-outline-success" href="{{url('armazens/create')}}" role="button"><i
+        <a class="btn btn-outline-primary" href="{{url('armazens/create')}}" role="button"><i
                 class="fa-light fa-plus fa-sm"></i> Cadastrar</a>
     </div>
     @csrf

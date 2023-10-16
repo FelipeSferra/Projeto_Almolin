@@ -43,13 +43,13 @@ class FuncionarioController extends Controller {
      * Store a newly created resource in storage.
      */
     public function store(Request $request) {
-        $date = $this->objFunc->create([
+        $data = $this->objFunc->create([
             'nome' => $request->nome,
             'id_emp'=>$request->emp,
             'cargo' => $request->cargo,
             'nivel' => $request->nivel,
         ]);
-        if($date){
+        if($data){
             return redirect('funcionarios');
         }
     }

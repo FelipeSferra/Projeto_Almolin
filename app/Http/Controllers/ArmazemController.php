@@ -42,7 +42,7 @@ class ArmazemController extends Controller {
      * Store a newly created resource in storage.
      */
     public function store(Request $request) {
-        $date = $this->objArm->create([
+        $data = $this->objArm->create([
             'desc' => $request->desc,
             'id_emp' => $request->emp,
             'cidade' => $request->cidade,
@@ -50,7 +50,7 @@ class ArmazemController extends Controller {
             'bairro' => $request->bairro,
             'numero' => $request->num,
         ]);
-        if($date){
+        if($data){
             return redirect('armazens');
         }
     }
@@ -73,7 +73,15 @@ class ArmazemController extends Controller {
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id) {
-        //
+        $this->objArm->where(['id'=>$id])->update([
+            'desc' => $request->desc,
+            'id_emp' => $request->emp,
+            'cidade' => $request->cidade,
+            'endereco' => $request->endereco,
+            'bairro' => $request->bairro,
+            'numero' => $request->num,
+            ]);
+        return redirect('armazens');
     }
 
     /**

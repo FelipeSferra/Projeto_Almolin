@@ -6,7 +6,7 @@
     <h2>Empresas</h2>
     <hr>
     <div class="col-md-2 mb-2">
-        <a class="btn btn-outline-success" href="{{url('empresas/create')}}" role="button"><i
+        <a class="btn btn-outline-primary" href="{{url('empresas/create')}}" role="button"><i
                 class="fa-light fa-plus fa-sm"></i> Cadastrar</a>
     </div>
     @csrf
@@ -21,17 +21,31 @@
         </thead>
         <tbody>
         @foreach($empresas as $empresa)
-            <tr>
-                <td>{{$empresa->id}}</td>
-                <td>{{$empresa->desc}}</td>
-                <td>{{$empresa->cidade}}</td>
-                <td>
-                    <div class="text-end">
-                        <a class="btn btn-outline-secondary mx-1" href="{{url("empresas/$empresa->id")}}" role="button"><i class="fa-light fa-eye fa-sm"></i> Visualizar</a>
-                        <a class="btn btn-outline-primary mx-2" href="{{url("empresas/$empresa->id/edit")}}" role="button"><i class="fa-light fa-pen-to-square fa-sm"></i> Editar</a>
-                    </div>
-                </td>
-            </tr>
+            <form name="formEdtCat" method="post" action="{{url("empresas/$empresa->id")}}">
+                @method("PUT")
+                @csrf
+                <tr>
+                    <td>{{$empresa->id}}</td>
+                    <td>
+                        <input type="text" id="descr" name="descr" class="form-control" value="{{$empresa->desc}}"
+                               onclick="show_btn({{$empresa->id}})">
+                    </td>
+                    <td>
+                        <input type="text" id="cidade" name="cidade" class="form-control" value="{{$empresa->cidade}}"
+                               onclick="show_btn({{$empresa->id}})">
+                    </td>
+                    <td>
+                        <div class="text-end">
+                            <button type="submit" class="btn btn-outline-success mx-2" id="{{$empresa->id}}"
+                                    disabled><i
+                                    class="fa-light fa-pen-to-square fa-sm"></i> Editar
+                            </button>
+                            <a class="btn btn-outline-danger mx-1" href="#"
+                               role="button"><i class="fa-light fa-trash fa-sm"></i> Remover</a>
+                        </div>
+                    </td>
+                </tr>
+            </form>
         @endforeach
         </tbody>
     </table>

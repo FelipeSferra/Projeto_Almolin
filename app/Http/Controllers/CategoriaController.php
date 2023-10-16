@@ -35,10 +35,10 @@ class CategoriaController extends Controller {
      * Store a newly created resource in storage.
      */
     public function store(Request $request) {
-        $date = $this->objCat->create([
+        $data = $this->objCat->create([
             'desc' => $request->descr,
         ]);
-        if($date){
+        if($data){
             return redirect('categorias');
         }
     }

@@ -24,24 +24,18 @@ class ProdutoController extends Controller {
      */
     public function index() {
         // $produtos = $this->objProd->all();
-        $produtos = DB::table('produto')
-            ->where('dump', '!=', 1)
-            ->get();
-        $categorias = $this->objCat->all();
-        $armazens = $this->objArm->all();
-        return view('produtos.index', compact('produtos','categorias','armazens'));
+        $produtos = DB::table('produto')->where('dump', '!=', 1)->get();
+        $categorias = DB::table('categoria')->where('dump', '!=', 1)->get();
+        $armazens = DB::table('armazem')->where('dump', '!=', 1)->get();
+        return view('produtos.index', compact('produtos', 'categorias', 'armazens'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create() {
-        $categorias = DB::table('categoria')
-            ->where('dump', '!=', 1)
-            ->get();
-        $armazens = DB::table('armazem')
-            ->where('dump', '!=', 1)
-            ->get();
+        $categorias = DB::table('categoria')->where('dump', '!=', 1)->get();
+        $armazens = DB::table('armazem')->where('dump', '!=', 1)->get();
         return view('produtos.create', compact('categorias', 'armazens'));
     }
 
@@ -49,14 +43,8 @@ class ProdutoController extends Controller {
      * Store a newly created resource in storage.
      */
     public function store(Request $request) {
-        $date = $this->objProd->create([
-            'desc' => $request->desc,
-            'custo'=>$request->custo,
-            'qtd' => $request->qtd,
-            'id_cat' => $request->categoria,
-            'id_arm' => $request->armazem
-        ]);
-        if($date){
+        $data = $this->objProd->create(['desc' => $request->desc, 'custo' => $request->custo, 'qtd' => $request->qtd, 'id_cat' => $request->categoria, 'id_arm' => $request->armazem]);
+        if ($data) {
             return redirect('produtos');
         }
     }
@@ -79,13 +67,7 @@ class ProdutoController extends Controller {
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id) {
-        $this->objProd->where(['id' => $id])->update([
-            'desc' => $request->desc,
-            'custo'=>$request->custo,
-            'qtd' => $request->qtd,
-            'id_cat' => $request->categoria,
-            'id_arm' => $request->armazem
-        ]);
+        $this->objProd->where(['id' => $id])->update(['desc' => $request->desc, 'custo' => $request->custo, 'qtd' => $request->qtd, 'id_cat' => $request->categoria, 'id_arm' => $request->armazem]);
         return redirect("produtos");
     }
 
