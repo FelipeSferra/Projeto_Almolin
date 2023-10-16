@@ -41,10 +41,10 @@
                     <a class="nav-link" href="{{url("categorias")}}">Categorias</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Local de estoque</a>
+                    <a class="nav-link" href="{{url("armazens")}}">Local de estoque</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Empresas</a>
+                    <a class="nav-link" href="{{url("empresas")}}">Empresas</a>
                 </li>
                 <!-- <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>

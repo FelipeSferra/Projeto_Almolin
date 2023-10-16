@@ -60,6 +60,8 @@
             <a href="{{url('produtos')}}" class="buttonMenu">Produtos</a>
             <a href="{{url('funcionarios')}}" class="buttonMenu" style="background-color: #004ADF">Funcionarios</a>
             <a href="{{url('categorias')}}" class="buttonMenu" style="background-color: #950700">Categorias</a>
+            <a href="{{url('empresas')}}" class="buttonMenu" style="background-color: #626262">Empresas</a>
+            <a href="{{url('armazens')}}" class="buttonMenu" style="background-color: #00457A">Armazens</a>
         </div>
     </section>
 </body>

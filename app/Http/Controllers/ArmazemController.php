@@ -4,42 +4,54 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-use App\Models\CategoriaModel;
+use App\Models\EmpresaModel;
+use App\Models\ArmazemModel;
 
-class CategoriaController extends Controller {
-    private $objCat;
+class ArmazemController extends Controller {
+    private $objEmp;
+    private $objArm;
 
     public function __construct() {
-        $this->objCat = new CategoriaModel();
+        $this->objArm = new ArmazemModel();
     }
 
     /**
      * Display a listing of the resource.
      */
     public function index() {
-        $categorias = DB::table('categoria')
+        $empresas = DB::table('empresa')
             ->where('dump', '!=', 1)
             ->get();
-        return view('categorias.index', compact('categorias'));
+        $armazens = DB::table('armazem')
+            ->where('dump', '!=', 1)
+            ->get();
+        return view('armazens.index', compact('armazens', 'empresas'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create() {
-        // $empresas = $this->objEmp->all();
-        return view('categorias.create');
+        $empresas = DB::table('empresa')
+            ->where('dump', '!=', 1)
+            ->get();
+        return view('armazens.create', compact('empresas'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request) {
-        $date = $this->objCat->create([
-            'desc' => $request->descr,
+        $date = $this->objArm->create([
+            'desc' => $request->desc,
+            'id_emp' => $request->emp,
+            'cidade' => $request->cidade,
+            'endereco' => $request->endereco,
+            'bairro' => $request->bairro,
+            'numero' => $request->num,
         ]);
         if($date){
-            return redirect('categorias');
+            return redirect('armazens');
         }
     }
 
@@ -61,10 +73,7 @@ class CategoriaController extends Controller {
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id) {
-        $this->objCat->where(['id'=>$id])->update([
-            'desc' => $request->descr
-        ]);
-        return redirect('categorias');
+        //
     }
 
     /**

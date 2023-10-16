@@ -4,23 +4,23 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-use App\Models\CategoriaModel;
+use App\Models\EmpresaModel;
 
-class CategoriaController extends Controller {
-    private $objCat;
+class EmpresaController extends Controller {
+    private $objEmp;
 
     public function __construct() {
-        $this->objCat = new CategoriaModel();
+        $this->objEmp = new EmpresaModel();
     }
 
     /**
      * Display a listing of the resource.
      */
     public function index() {
-        $categorias = DB::table('categoria')
+        $empresas = DB::table('empresa')
             ->where('dump', '!=', 1)
             ->get();
-        return view('categorias.index', compact('categorias'));
+        return view('empresas.index', compact('empresas'));
     }
 
     /**
@@ -28,18 +28,19 @@ class CategoriaController extends Controller {
      */
     public function create() {
         // $empresas = $this->objEmp->all();
-        return view('categorias.create');
+        return view('empresas.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request) {
-        $date = $this->objCat->create([
+        $date = $this->objEmp->create([
+            'cidade' => $request->cidade,
             'desc' => $request->descr,
         ]);
         if($date){
-            return redirect('categorias');
+            return redirect('empresas');
         }
     }
 
@@ -61,10 +62,7 @@ class CategoriaController extends Controller {
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id) {
-        $this->objCat->where(['id'=>$id])->update([
-            'desc' => $request->descr
-        ]);
-        return redirect('categorias');
+        //
     }
 
     /**

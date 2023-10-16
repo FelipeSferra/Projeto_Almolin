@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\ProdutoModel;
 use App\Models\CategoriaModel;
@@ -22,7 +23,10 @@ class ProdutoController extends Controller {
      * Display a listing of the resource.
      */
     public function index() {
-        $produtos = $this->objProd->all();
+        // $produtos = $this->objProd->all();
+        $produtos = DB::table('produto')
+            ->where('dump', '!=', 1)
+            ->get();
         $categorias = $this->objCat->all();
         $armazens = $this->objArm->all();
         return view('produtos.index', compact('produtos','categorias','armazens'));
@@ -32,8 +36,12 @@ class ProdutoController extends Controller {
      * Show the form for creating a new resource.
      */
     public function create() {
-        $categorias = $this->objCat->all();
-        $armazens = $this->objArm->all();
+        $categorias = DB::table('categoria')
+            ->where('dump', '!=', 1)
+            ->get();
+        $armazens = DB::table('armazem')
+            ->where('dump', '!=', 1)
+            ->get();
         return view('produtos.create', compact('categorias', 'armazens'));
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\FuncionarioModel;
 use App\Models\EmpresaModel;
@@ -19,8 +20,12 @@ class FuncionarioController extends Controller {
      * Display a listing of the resource.
      */
     public function index() {
-        $funcionarios = $this->objFunc->all();
-        $empresas = $this->objEmp->all();
+        $funcionarios = DB::table('funcionario')
+            ->where('dump', '!=', 1)
+            ->get();
+        $empresas = DB::table('empresa')
+            ->where('dump', '!=', 1)
+            ->get();
         return view('funcionarios.index', compact('funcionarios','empresas'));
     }
 
@@ -28,7 +33,9 @@ class FuncionarioController extends Controller {
      * Show the form for creating a new resource.
      */
     public function create() {
-        $empresas = $this->objEmp->all();
+        $empresas = DB::table('empresa')
+            ->where('dump', '!=', 1)
+            ->get();
         return view('funcionarios.create', compact('empresas'));
     }
 
