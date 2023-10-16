@@ -68,5 +68,6 @@
     @yield('content')
 </div>
 <script src="{{url("assets/js/script.js")}}"></script>
+<script src="{{url("assets/swal/dist/sweetalert2.all.js")}}"></script>
 </body>
 </html>

@@ -24,21 +24,14 @@ Route::get('/', function () {
 
 Route::resources([
     '/produtos'=>ProdutoController::class,
-    ]);
-
-Route::resources([
     '/funcionarios'=>FuncionarioController::class,
-    ]);
-
-Route::resources([
     '/categorias'=>CategoriaController::class,
-    ]);
-
-Route::resources([
     '/empresas'=>EmpresaController::class,
-    ]);
-
-Route::resources([
     '/armazens'=>ArmazemController::class,
-    ]);
-    
+]);
+
+Route::get('/produtoDelete/{id}', [ProdutoController::class, 'delete']);
+Route::get('/funcionarioDelete/{id}', [FuncionarioController::class, 'delete']);
+Route::get('/categoriaDelete/{id}', [CategoriaController::class, 'delete']);
+Route::get('/empresaDelete/{id}', [EmpresaController::class, 'delete']);
+Route::get('/armazemDelete/{id}', [ArmazemController::class, 'delete']);

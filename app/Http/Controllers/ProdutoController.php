@@ -77,4 +77,11 @@ class ProdutoController extends Controller {
     public function destroy(string $id) {
         //
     }
+
+    public function delete(string $id){
+        $this->objProd->where(['id'=>$id])->update([
+            'dump' => 1
+        ]);
+        return redirect('produtos');
+    }
 }

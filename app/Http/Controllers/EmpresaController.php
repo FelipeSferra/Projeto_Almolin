@@ -75,4 +75,11 @@ class EmpresaController extends Controller {
     public function destroy(string $id) {
         //
     }
+
+    public function delete(string $id){
+        $this->objEmp->where(['id'=>$id])->update([
+            'dump' => 1
+        ]);
+        return redirect('empresas');
+    }
 }

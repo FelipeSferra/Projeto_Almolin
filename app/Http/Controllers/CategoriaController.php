@@ -73,4 +73,11 @@ class CategoriaController extends Controller {
     public function destroy(string $id) {
         //
     }
+
+    public function delete(string $id){
+        $this->objCat->where(['id'=>$id])->update([
+            'dump' => 1
+        ]);
+        return redirect('categorias');
+    }
 }

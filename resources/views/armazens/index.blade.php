@@ -64,12 +64,11 @@
                     </td>
                     <td>
                         <div class="text-end">
-                            <button type="submit" class="btn btn-outline-success mx-2" id="{{$armazem->id}}"
+                            <button type="submit" class="btn btn-outline-success mx-2" id="{{$armazem->id}}" onclick="EditConfirm();"
                                     disabled><i
                                     class="fa-light fa-pen-to-square fa-sm"></i> Editar
                             </button>
-                            <a class="btn btn-outline-danger mx-1" href="#"
-                               role="button"><i class="fa-light fa-trash fa-sm"></i> Remover</a>
+                            <button type="button" class="btn btn-outline-danger mx-1 delete" onclick="Delete('{{url("armazemDelete/$armazem->id")}}');"><i class="fa-light fa-trash fa-sm"></i> Remover</button>
                         </div>
                     </td>
                 </tr>
