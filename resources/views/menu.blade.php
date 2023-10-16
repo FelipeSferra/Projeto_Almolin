@@ -57,6 +57,7 @@
     <section>
         <div class="areaMenu">
             <h1 class="titleMenu">ALMOLIN</h1>
+            <a href="{{url('transacao')}}" class="buttonMenu" style="background-color: #00C40A">Emprestar</a>
             <a href="{{url('produtos')}}" class="buttonMenu">Produtos</a>
             <a href="{{url('funcionarios')}}" class="buttonMenu" style="background-color: #004ADF">Funcionarios</a>
             <a href="{{url('categorias')}}" class="buttonMenu" style="background-color: #950700">Categorias</a>

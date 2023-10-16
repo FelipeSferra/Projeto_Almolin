@@ -5,6 +5,7 @@ use App\Http\Controllers\FuncionarioController;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\EmpresaController;
+use App\Http\Controllers\TransacaoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,6 +29,7 @@ Route::resources([
     '/categorias'=>CategoriaController::class,
     '/empresas'=>EmpresaController::class,
     '/armazens'=>ArmazemController::class,
+    '/transacao' => TransacaoController::class
 ]);
 
 Route::get('/produtoDelete/{id}', [ProdutoController::class, 'delete']);
@@ -35,3 +37,4 @@ Route::get('/funcionarioDelete/{id}', [FuncionarioController::class, 'delete']);
 Route::get('/categoriaDelete/{id}', [CategoriaController::class, 'delete']);
 Route::get('/empresaDelete/{id}', [EmpresaController::class, 'delete']);
 Route::get('/armazemDelete/{id}', [ArmazemController::class, 'delete']);
+Route::get('/transacaoDelete/{id}', [TransacaoController::class, 'delete']);

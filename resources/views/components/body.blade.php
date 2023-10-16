@@ -32,6 +32,9 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="{{url("transacao")}}">Transações</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="{{url("produtos")}}">Produtos</a>
                 </li>
                 <li class="nav-item">
