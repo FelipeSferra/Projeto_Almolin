@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-
 use App\Models\CategoriaModel;
 
 class CategoriaController extends Controller {
@@ -17,7 +17,9 @@ class CategoriaController extends Controller {
      * Display a listing of the resource.
      */
     public function index() {
-        $categorias = $this->objCat->all();
+        $categorias = DB::table('categoria')
+            ->where('dump', '!=', 1)
+            ->get();
         return view('categorias.index', compact('categorias'));
     }
 

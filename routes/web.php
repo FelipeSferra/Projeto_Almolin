@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\ArmazemController;
 use App\Http\Controllers\FuncionarioController;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\EmpresaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,3 +33,12 @@ Route::resources([
 Route::resources([
     '/categorias'=>CategoriaController::class,
     ]);
+
+Route::resources([
+    '/empresas'=>EmpresaController::class,
+    ]);
+
+Route::resources([
+    '/armazens'=>ArmazemController::class,
+    ]);
+    

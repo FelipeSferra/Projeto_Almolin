@@ -4,27 +4,28 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-use App\Models\FuncionarioModel;
 use App\Models\EmpresaModel;
+use App\Models\ArmazemModel;
 
-class FuncionarioController extends Controller {
-    private $objFunc;
+class ArmazemController extends Controller {
     private $objEmp;
+    private $objArm;
 
     public function __construct() {
-        $this->objFunc = new FuncionarioModel();
-        $this->objEmp = new EmpresaModel();
+        $this->objArm = new ArmazemModel();
     }
 
     /**
      * Display a listing of the resource.
      */
     public function index() {
-        $funcionarios = DB::table('funcionario')
+        $empresas = DB::table('empresa')
             ->where('dump', '!=', 1)
             ->get();
-        $empresas = $this->objEmp->all();
-        return view('funcionarios.index', compact('funcionarios','empresas'));
+        $armazens = DB::table('armazem')
+            ->where('dump', '!=', 1)
+            ->get();
+        return view('armazens.index', compact('armazens', 'empresas'));
     }
 
     /**
@@ -34,21 +35,23 @@ class FuncionarioController extends Controller {
         $empresas = DB::table('empresa')
             ->where('dump', '!=', 1)
             ->get();
-        return view('funcionarios.create', compact('empresas'));
+        return view('armazens.create', compact('empresas'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request) {
-        $date = $this->objFunc->create([
-            'nome' => $request->nome,
-            'id_emp'=>$request->emp,
-            'cargo' => $request->cargo,
-            'nivel' => $request->nivel,
+        $date = $this->objArm->create([
+            'desc' => $request->desc,
+            'id_emp' => $request->emp,
+            'cidade' => $request->cidade,
+            'endereco' => $request->endereco,
+            'bairro' => $request->bairro,
+            'numero' => $request->num,
         ]);
         if($date){
-            return redirect('funcionarios');
+            return redirect('armazens');
         }
     }
 
@@ -70,13 +73,7 @@ class FuncionarioController extends Controller {
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id) {
-        $this->objFunc->where(['id'=>$id])->update([
-            'nome' => $request->nome,
-            'id_emp'=>$request->emp,
-            'cargo' => $request->cargo,
-            'nivel' => $request->nivel
-        ]);
-        return redirect("funcionarios");
+        //
     }
 
     /**
