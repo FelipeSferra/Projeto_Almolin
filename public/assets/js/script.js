@@ -30,3 +30,7 @@ function EditConfirm(){
         timer: 1500
     })
 }
+
+function logout(){
+
+}
