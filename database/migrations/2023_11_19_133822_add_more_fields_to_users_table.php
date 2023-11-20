@@ -13,8 +13,15 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->unique('name');
+            $table->string('email')->nullable()->change();
             $table->renameColumn('name', 'username');
+            $table->string('nome',40);
             $table->integer('level')->default(1);
+            $table->string('cargo',40);
+            $table->unsignedBigInteger('id_emp');
+            $table->foreign('id_emp')->references('id')->on('empresa')->onDelete('cascade')->onUpdate('cascade');
+            $table->integer('dump')->default('0');
+            $table->dropColumn('email_verified_at');
         });
     }
 

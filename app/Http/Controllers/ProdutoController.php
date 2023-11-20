@@ -22,9 +22,17 @@ class ProdutoController extends Controller {
     /**
      * Display a listing of the resource.
      */
-    public function index() {
-        // $produtos = $this->objProd->all();
-        $produtos = DB::table('produto')->where('dump', '!=', 1)->get();
+    public function index(Request $request) {
+        if ($request->categoria != '' && $request->categoria != null && $request->categoria != 'undefined' && $request->categoria != '0') {
+            $produtos = DB::table('produto')
+                ->where('dump', '!=', 1)
+                ->where('id_cat', $request->categoria)
+                ->get();
+        }
+        else {
+            $produtos = DB::table('produto')->where('dump', '!=', 1)
+                ->get();
+        }
         $categorias = DB::table('categoria')->where('dump', '!=', 1)->get();
         $armazens = DB::table('armazem')->where('dump', '!=', 1)->get();
         return view('produtos.index', compact('produtos', 'categorias', 'armazens'));

@@ -15,6 +15,7 @@ function Delete(url) {
         title: 'Você tem certeza?',
         text: "Não será possível reverter essa ação!",
         icon: 'warning',
+        cancelButtonText: 'Cancelar',
         showCancelButton: true,
         preConfirm: () => {
             window.location.href = url;

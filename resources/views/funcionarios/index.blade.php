@@ -14,6 +14,7 @@
         <thead class="text-center table-dark">
         <tr>
             <th scope="col">ID</th>
+            <th scope="col">Usuário</th>
             <th scope="col">Nome</th>
             <th scope="col">Empresa</th>
             <th scope="col">Cargo</th>
@@ -28,6 +29,10 @@
                 @csrf
                 <tr>
                     <td>{{$funcionario->id}}</td>
+                    <td>
+                        <input type="text" id="usuario" name="usuario" class="form-control" value="{{$funcionario->username}}"
+                               onclick="show_btn({{$funcionario->id}})">
+                    </td>
                     <td>
                         <input type="text" id="nome" name="nome" class="form-control" value="{{$funcionario->nome}}"
                                onclick="show_btn({{$funcionario->id}})">
@@ -47,7 +52,7 @@
                     </td>
                     <td>
                         <input type="number" id="nivel" name="nivel" class="form-control"
-                               value="{{$funcionario->nivel}}"
+                               value="{{$funcionario->level}}"
                                onclick="show_btn({{$funcionario->id}})">
                     </td>
                     <td>

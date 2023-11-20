@@ -30,12 +30,36 @@ class TransacaoController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $transacoes = DB::table('transacao')
-            ->where('dump', '!=', 1)
-            ->get();
-        $funcionarios = DB::table('funcionario')
+        if (($request->produto != '' && $request->produto != null && $request->produto != 'undefined' && $request->armazem != '' && $request->armazem != null && $request->armazem != 'undefined')  && ($request->armazem != '0' || $request->produto != '0')) {
+            if ($request->produto == '0' ) {
+                $transacoes = DB::table('transacao')
+                    ->where('dump', '!=', 1)
+                    ->where('id_arm', $request->armazem)
+                    ->get();
+            }
+            else if ($request->armazem == '0') {
+                $transacoes = DB::table('transacao')
+                    ->where('dump', '!=', 1)
+                    ->where('id_itm', $request->produto)
+                    ->get();
+            }
+            else {
+                $transacoes = DB::table('transacao')
+                    ->where('dump', '!=', 1)
+                    ->where('id_itm', $request->produto)
+                    ->where('id_arm', $request->armazem)
+                    ->get();
+            }
+
+        }
+        else {
+            $transacoes = DB::table('transacao')
+                ->where('dump', '!=', 1)
+                ->get();
+        }
+        $funcionarios = DB::table('users')
             ->where('dump', '!=', 1)
             ->get();
         $empresas = DB::table('empresa')
@@ -50,6 +74,7 @@ class TransacaoController extends Controller
         return view('transacao.index', compact('transacoes', 'funcionarios', 'empresas', 'produtos', 'armazens'));
     }
 
+
     /**
      * Show the form for creating a new resource.
      */
@@ -58,7 +83,7 @@ class TransacaoController extends Controller
         $transacoes = DB::table('transacao')
             ->where('dump', '!=', 1)
             ->get();
-        $funcionarios = DB::table('funcionario')
+        $funcionarios = DB::table('users')
             ->where('dump', '!=', 1)
             ->get();
         $empresas = DB::table('empresa')

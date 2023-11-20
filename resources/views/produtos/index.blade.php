@@ -8,10 +8,16 @@
 @section('content')
     <h2>Produtos</h2>
     <hr>
-    <div class="col-md-2 mb-2">
-        <a class="btn btn-outline-primary" href="{{url('produtos/create')}}" role="button"><i
-                class="fa-light fa-plus fa-sm"></i> Cadastrar</a>
-    </div>
+    <div style="display: flex; flex-direction: row">
+        <div class="col-md-2 mb-2" style="width: 9.666667%">
+            <a class="btn btn-outline-primary" href="{{url('produtos/create')}}" role="button">
+                <i class="fa-light fa-plus fa-sm"></i> Cadastrar</a>
+        </div>
+        <div class="col-md-2 mb-2" data-bs-toggle="modal" data-bs-target="#modalFilter">
+            <a class="btn btn-outline-secondary" role="button">
+                <i class="fa-light fa-filter"></i> Filtrar</a>
+        </div>
+    </div
     @csrf
     <table class="table table-bordered table-sm">
         <thead class="text-center table-dark">
@@ -71,5 +77,31 @@
         @endforeach
         </tbody>
     </table>
+    <div class="modal" id="modalFilter">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Filtrar dados</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form name="formFilterProd" method="get" action="{{url("produtos/")}}">
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Categoria</label>
+                            <select id="categoria" name="categoria" class="form-select">
+                                <option value="0">Todas</option>
+                                @foreach($categorias as $categoria)
+                                    <option value="{{$categoria->id}}" {{$categoria->id === $produto->id_cat ? "selected" : ""}}>{{$categoria->desc}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-primary">Confirmar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
-

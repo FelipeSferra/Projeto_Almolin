@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('transacao', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_func');
-            $table->foreign('id_func')->references('id')->on('funcionario')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('id_func')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->unsignedBigInteger('id_emp');
             $table->foreign('id_emp')->references('id')->on('empresa')->onUpdate('cascade')->onDelete('cascade');
             $table->unsignedBigInteger('id_itm');

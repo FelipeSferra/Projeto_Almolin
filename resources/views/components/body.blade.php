@@ -38,21 +38,22 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{url("produtos")}}">Produtos</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{url("funcionarios")}}">Funcionarios</a>
-                </li>
+                @if(Auth::user()->level === 3)
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url("funcionarios")}}">Funcionarios</a>
+                    </li>
+                @endif
                 <li class="nav-item">
                     <a class="nav-link" href="{{url("categorias")}}">Categorias</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{url("armazens")}}">Local de estoque</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{url("empresas")}}">Empresas</a>
-                </li>
+                @if(Auth::user()->level === 2 || Auth::user()->level === 3)
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url("armazens")}}">Local de estoque</a>
+                    </li>
+                @endif
                 @if(Auth::user()->level === 3)
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Usuários</a>
+                        <a class="nav-link" href="{{url("empresas")}}">Empresas</a>
                     </li>
                 @endif
             </ul>

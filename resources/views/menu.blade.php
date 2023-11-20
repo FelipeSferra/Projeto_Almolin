@@ -71,37 +71,43 @@
     </style>
 </head>
 <body class="backgroundMenu">
-    <section>
-        <div class="areaMenu">
-            <h1 class="titleMenu">ALMOLIN</h1>
-            <div style="flex-direction: row; width: 90%; height: 90%; display: flex; margin-top: 1rem">
-                <button class="buttonMenu" onclick="navigationTrans()">
-                    <img src="{{url('assets/img/transferir.png')}}" width="70" height="70">  
-                    <a href="{{url('transacao')}}" class="textMenu">Emprestar</a>
-                </button>
-                <button class="buttonMenu">
-                    <img src="{{url('assets/img/produtos.png')}}" onclick="navigationProd()" width="70" height="70">  
-                    <a href="{{url('produtos')}}" class="textMenu">Produtos</a>
-                </button>
-                <button class="buttonMenu">
-                    <img src="{{url('assets/img/funcionarios.png')}}" onclick="navigationFunc()" width="70" height="70">  
+<section>
+    <div class="areaMenu">
+        <h1 class="titleMenu">ALMOLIN</h1>
+        <div style="flex-direction: row; width: 90%; height: 90%; display: flex; margin-top: 1rem">
+            <button class="buttonMenu" onclick="navigationTrans()">
+                <img src="{{url('assets/img/transferir.png')}}" width="70" height="70">
+                <a href="{{url('transacao')}}" class="textMenu">Emprestar</a>
+            </button>
+            <button class="buttonMenu" onclick="navigationProd()">
+                <img src="{{url('assets/img/produtos.png')}}" width="70" height="70">
+                <a href="{{url('produtos')}}" class="textMenu">Produtos</a>
+            </button>
+            @if(Auth::user()->level === 3)
+                <button class="buttonMenu" onclick="navigationFunc()">
+                    <img src="{{url('assets/img/funcionarios.png')}}" width="70" height="70">
                     <a href="{{url('funcionarios')}}" class="textMenu">Funcionários</a>
                 </button>
-                <button class="buttonMenu">
-                    <img src="{{url('assets/img/categorias.png')}}" onclick="navigationCat()" width="70" height="70">  
-                    <a href="{{url('categorias')}}" class="textMenu">Categorias</a>
-                </button>
-                <button class="buttonMenu">
-                    <img src="{{url('assets/img/predio.png')}}" onclick="navigationEmp()" width="70" height="70">  
+            @endif
+            <button class="buttonMenu" onclick="navigationCat()">
+                <img src="{{url('assets/img/categorias.png')}}" width="70" height="70">
+                <a href="{{url('categorias')}}" class="textMenu">Categorias</a>
+            </button>
+            @if(Auth::user()->level === 3)
+                <button class="buttonMenu" onclick="navigationEmp()">
+                    <img src="{{url('assets/img/predio.png')}}" width="70" height="70">
                     <a href="{{url('empresas')}}" class="textMenu">Empresas</a>
                 </button>
-                <button class="buttonMenu">
-                    <img src="{{url('assets/img/armazem.png')}}" onclick="navigationArm()" width="70" height="70">  
+            @endif
+            @if(Auth::user()->level === 2 || Auth::user()->level === 3)
+                <button class="buttonMenu" onclick="navigationArm()">
+                    <img src="{{url('assets/img/armazem.png')}}" width="70" height="70">
                     <a href="{{url('armazens')}}" class="textMenu">Armazens</a>
                 </button>
-            </div>
+            @endif
         </div>
-    </section>
+    </div>
+</section>
 </body>
 </html>
 
@@ -113,7 +119,7 @@
     function navigationProd() {
         window.location.href = "{{url('produtos')}}";
     }
-    
+
     function navigationFunc() {
         window.location.href = "{{url('funcionarios')}}";
     }

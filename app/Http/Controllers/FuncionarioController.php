@@ -2,17 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\FuncionarioModel;
 use App\Models\EmpresaModel;
+use Illuminate\Support\Facades\Hash;
 
 class FuncionarioController extends Controller {
     private $objFunc;
     private $objEmp;
 
     public function __construct() {
-        $this->objFunc = new FuncionarioModel();
+        $this->objFunc = new User();
         $this->objEmp = new EmpresaModel();
     }
 
@@ -20,7 +22,7 @@ class FuncionarioController extends Controller {
      * Display a listing of the resource.
      */
     public function index() {
-        $funcionarios = DB::table('funcionario')
+        $funcionarios = DB::table('users')
             ->where('dump', '!=', 1)
             ->get();
         $empresas = DB::table('empresa')
@@ -44,10 +46,13 @@ class FuncionarioController extends Controller {
      */
     public function store(Request $request) {
         $data = $this->objFunc->create([
+            'username' => $request->username,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'level' => $request->level,
             'nome' => $request->nome,
-            'id_emp'=>$request->emp,
             'cargo' => $request->cargo,
-            'nivel' => $request->nivel,
+            'id_emp' => $request->id_emp,
         ]);
         if($data){
             return redirect('funcionarios');
@@ -73,10 +78,13 @@ class FuncionarioController extends Controller {
      */
     public function update(Request $request, string $id) {
         $this->objFunc->where(['id'=>$id])->update([
+            'username' => $request->username,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'level' => $request->level,
             'nome' => $request->nome,
-            'id_emp'=>$request->emp,
             'cargo' => $request->cargo,
-            'nivel' => $request->nivel
+            'id_emp' => $request->id_emp,
         ]);
         return redirect("funcionarios");
     }
