@@ -80,7 +80,6 @@ class FuncionarioController extends Controller {
         $this->objFunc->where(['id'=>$id])->update([
             'username' => $request->username,
             'email' => $request->email,
-            'password' => Hash::make($request->password),
             'level' => $request->level,
             'nome' => $request->nome,
             'cargo' => $request->cargo,

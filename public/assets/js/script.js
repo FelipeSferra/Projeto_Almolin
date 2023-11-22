@@ -32,6 +32,11 @@ function EditConfirm(){
     })
 }
 
-function logout(){
-
-}
+$(document).ready(function() {
+    $('#id_func').change(function() {
+        var selectedOption = $(this).find(':selected');
+        var idEmpValue = selectedOption.data('id-emp');
+        $('#id_emp').val(idEmpValue);
+        console.log($('#id_emp').val())
+    });
+});

@@ -26,32 +26,32 @@ Route::get('/', function () {
 
 Route::middleware(['auth', 'armazem'])->group(function () {
     Route::resource('armazens', ArmazemController::class);
-    Route::get('/armazemDelete/{id}', [ArmazemController::class, 'delete']);
+    Route::get('/armazemDelete/{id}', [ArmazemController::class, 'delete'])->name('armazens.delete');
 });
 
 Route::middleware(['auth', 'categoria'])->group(function () {
     Route::resource('categorias', CategoriaController::class);
-    Route::get('/categoriaDelete/{id}', [CategoriaController::class, 'delete']);
+    Route::get('/categoriaDelete/{id}', [CategoriaController::class, 'delete'])->name('categorias.delete');
 });
 
 Route::middleware(['auth', 'empresa'])->group(function () {
     Route::resource('empresas', EmpresaController::class);
-    Route::get('/empresaDelete/{id}', [EmpresaController::class, 'delete']);
+    Route::get('/empresaDelete/{id}', [EmpresaController::class, 'delete'])->name('empresas.delete');
 });
 
 Route::middleware(['auth', 'funcionario'])->group(function () {
     Route::resource('funcionarios', FuncionarioController::class);
-    Route::get('/funcionarioDelete/{id}', [FuncionarioController::class, 'delete']);
+    Route::get('/funcionarioDelete/{id}', [FuncionarioController::class, 'delete'])->name('funcionarios.delete');
 });
 
 Route::middleware(['auth', 'produto'])->group(function () {
     Route::resource('produtos', ProdutoController::class);
-    Route::get('/produtoDelete/{id}', [ProdutoController::class, 'delete']);
+    Route::get('/produtoDelete/{id}', [ProdutoController::class, 'delete'])->name('produtos.delete');
 });
 
 Route::middleware(['auth', 'transacao'])->group(function () {
     Route::resource('transacao', TransacaoController::class);
-    Route::get('/transacaoDelete/{id}', [TransacaoController::class, 'delete']);
+    Route::get('/transacaoDelete/{id}', [TransacaoController::class, 'delete'])->name('transacao.delete');
 });
 
 require __DIR__ . '/auth.php';

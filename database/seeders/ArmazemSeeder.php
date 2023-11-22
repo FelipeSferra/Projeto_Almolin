@@ -7,16 +7,14 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
-class EmpresaSeeder extends Seeder
+class ArmazemSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
-
-
     public function run(): void
     {
-        $table = 'empresa';
+        $table = 'armazem';
         $cidades = array("Assis", "Taruma", "Ourinhos", "Presidente Prudente", "Palmital", "Marilia");
         $quantidade = count($cidades);
 
@@ -24,8 +22,12 @@ class EmpresaSeeder extends Seeder
 
         for ($i = 0; $i < $quantidade; $i++) {
             DB::table($table)->insert([
-                'desc' => "Almolin " . ($i + 1),
+                'desc' => "Almolin - " . $cidades[$i],
+                'id_emp' => random_int(1,6),
                 'cidade' => $cidades[$i],
+                'endereco' => "Rua " . random_int(1,100),
+                'bairro' => "Bairro " . random_int(1,50),
+                'numero' =>  random_int(1,1000),
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
