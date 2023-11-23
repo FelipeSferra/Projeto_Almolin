@@ -17,7 +17,7 @@ class ArmazemMiddleware
     public function handle(Request $request, Closure $next)
     {
         $allowedLevel = [2,3];
-        if (!in_array(Auth::user()->level, $allowedLevel))
+        if (in_array(Auth::user()->level, $allowedLevel))
         {
             return $next($request);
         }
