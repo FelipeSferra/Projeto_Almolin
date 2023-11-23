@@ -21,3 +21,7 @@
 
 ##### Movimentações
   - Baixa de estoque
+
+#### Novas funcionalidades
+  - Sistema de autenticação e autorização
+  - Filtragem de dados nas tabelas de produto e transação
