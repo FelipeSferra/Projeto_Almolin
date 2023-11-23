@@ -158,6 +158,21 @@ class TransacaoController extends Controller
         $this->objTrans->where(['id' => $id])->update([
             'dump' => 1
         ]);
+        
+        $idProd = DB::table('transacao')->where([
+            'id' => $id,
+            'dump' => 1
+        ])->pluck('id_itm');
+
+        $qtdProd = DB::table('transacao')->where([
+            'id' => $id,
+            'dump' => 1
+        ])->pluck('qtd');
+
+        DB::table('produto')
+            ->where('id', $idProd->first())
+            ->increment('qtd', $qtdProd->first());
+
         return redirect('transacao');
     }
 
@@ -166,12 +181,12 @@ class TransacaoController extends Controller
         $idProd = $request->input('id_itm');
         $qtd = $request->input('qtd');
 
-        if($qtd <= 0){
+        if ($qtd <= 0) {
             return response()->json(['invalido' => true]);
         }
 
         $disponivel = $this->verificarEstoque($idProd, $qtd);
-        
+
         return response()->json(['disponivel' => $disponivel]);
     }
 

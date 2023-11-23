@@ -23,7 +23,9 @@
                     <i class="fa-light fa-filter"></i> Filtrar</a>
             @endif
         </div>
-        @if ((request()->filled('produto') && request('produto') != 0) || (request()->filled('armazem') && request('armazem') != 0))
+        @if (
+            (request()->filled('produto') && request('produto') != 0) ||
+                (request()->filled('armazem') && request('armazem') != 0))
             <div class="col-md-auto ms-auto">
                 <a href="{{ url('transacao') }}" class="btn btn-outline-warning">
                     <i class="fa-light fa-filter-slash"></i> Remover filtro
@@ -75,7 +77,7 @@
                             <div class="text-end">
                                 <button type="button" class="btn btn-outline-danger mx-1 delete"
                                     onclick="Delete('{{ route('transacao.delete', ['id' => $transacao->id]) }}');"><i
-                                        class="fa-light fa-trash fa-sm"></i> Remover
+                                        class="fa-light fa-trash-undo fa-sm"></i> Desfazer
                                 </button>
                             </div>
                         </td>
