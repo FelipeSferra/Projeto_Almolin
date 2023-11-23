@@ -7,6 +7,7 @@
 @section('content')
     <h2>Transação</h2>
     <hr>
+    <div id="urlData" data-estoque="{{ route('verificar.estoque') }}"></div>
     <form id="formTran" name="formTran" method="post" action="{{ url('transacao') }}">
         @csrf
 
@@ -14,7 +15,7 @@
             <div class="col-md-4 mt-3">
                 <label for="idFunc">Funcionário</label>
                 <select id="id_func" name="id_func" class="form-control" required>
-                    <option selected>Selecione...</option>
+                    <option value="" selected>Selecione...</option>
                     @foreach ($funcionarios as $funcionario)
                         <option value="{{ $funcionario->id }}" data-id-emp="{{ $funcionario->id_emp }}">
                             {{ $funcionario->nome }}</option>
@@ -25,21 +26,21 @@
             <div class="col-md-4 mt-3">
                 <label for="idFunc">Produto</label>
                 <select id="id_itm" name="id_itm" class="form-control" required>
-                    <option selected>Selecione...</option>
+                    <option value="" selected>Selecione...</option>
                     @foreach ($produtos as $produto)
                         <option value="{{ $produto->id }}">{{ $produto->desc }}</option>
-                        <!-- <input type="hidden" id="id_emp" value="{{ $funcionario->id_emp }}">  -->
                     @endforeach
                 </select>
             </div>
             <div class="col-md-1 mt-3">
                 <label for="qtd">Quantidade</label>
-                <input type="number" id="qtd" name="qtd" class="form-control" placeholder="QTD" required>
+                <input type="number" id="qtd" name="qtd" class="form-control" placeholder="QTD" min="1"
+                    required>
             </div>
             <div class="col-md-3 mt-3">
                 <label for="categoria">Armazem</label>
                 <select id="id_arm" name="id_arm" class="form-control" required>
-                    <option selected>Selecione...</option>
+                    <option value="" selected>Selecione...</option>
                     @foreach ($armazem as $armazens)
                         <option value="{{ $armazens->id }}">{{ $armazens->desc }}</option>
                     @endforeach

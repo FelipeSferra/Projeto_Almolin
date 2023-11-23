@@ -33,28 +33,24 @@ class TransacaoController extends Controller
     public function index(Request $request)
     {
         if (($request->produto != '' && $request->produto != null && $request->produto != 'undefined' && $request->armazem != '' && $request->armazem != null && $request->armazem != 'undefined')  && ($request->armazem != '0' || $request->produto != '0')) {
-            if ($request->produto == '0' ) {
+            if ($request->produto == '0') {
                 $transacoes = DB::table('transacao')
                     ->where('dump', '!=', 1)
                     ->where('id_arm', $request->armazem)
                     ->get();
-            }
-            else if ($request->armazem == '0') {
+            } else if ($request->armazem == '0') {
                 $transacoes = DB::table('transacao')
                     ->where('dump', '!=', 1)
                     ->where('id_itm', $request->produto)
                     ->get();
-            }
-            else {
+            } else {
                 $transacoes = DB::table('transacao')
                     ->where('dump', '!=', 1)
                     ->where('id_itm', $request->produto)
                     ->where('id_arm', $request->armazem)
                     ->get();
             }
-
-        }
-        else {
+        } else {
             $transacoes = DB::table('transacao')
                 ->where('dump', '!=', 1)
                 ->get();
@@ -157,10 +153,34 @@ class TransacaoController extends Controller
         //
     }
 
-    public function delete(string $id){
-        $this->objTrans->where(['id'=>$id])->update([
+    public function delete(string $id)
+    {
+        $this->objTrans->where(['id' => $id])->update([
             'dump' => 1
         ]);
         return redirect('transacao');
+    }
+
+    public function estoque(Request $request)
+    {
+        $idProd = $request->input('id_itm');
+        $qtd = $request->input('qtd');
+
+        $disponivel = $this->verificarEstoque($idProd, $qtd);
+        
+        return response()->json(['disponivel' => $disponivel]);
+    }
+
+    private function verificarEstoque($idProd, $qtd)
+    {
+        $estoque = DB::table('produto')->where([
+            'id' => $idProd,
+            'dump' => 0
+        ])->pluck('qtd');
+        if ($estoque->count() > 0 && $estoque->first() > $qtd) {
+            return true;
+        }
+
+        return false;
     }
 }

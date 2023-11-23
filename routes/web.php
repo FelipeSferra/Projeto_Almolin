@@ -52,6 +52,7 @@ Route::middleware(['auth', 'produto'])->group(function () {
 Route::middleware(['auth', 'transacao'])->group(function () {
     Route::resource('transacao', TransacaoController::class);
     Route::get('/transacaoDelete/{id}', [TransacaoController::class, 'delete'])->name('transacao.delete');
+    Route::post('/transacao/verificar-estoque', [TransacaoController::class, 'estoque'])->name('verificar.estoque');
 });
 
 require __DIR__ . '/auth.php';
