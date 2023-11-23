@@ -34,8 +34,7 @@
             </div>
             <div class="col-md-1 mt-3">
                 <label for="qtd">Quantidade</label>
-                <input type="number" id="qtd" name="qtd" class="form-control" placeholder="QTD" min="1"
-                    required>
+                <input type="number" id="qtd" name="qtd" class="form-control" placeholder="QTD" required>
             </div>
             <div class="col-md-3 mt-3">
                 <label for="categoria">Armazem</label>

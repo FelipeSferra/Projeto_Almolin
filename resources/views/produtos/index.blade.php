@@ -8,12 +8,12 @@
 @section('content')
     <h2>Produtos</h2>
     <hr>
-    <div style="display: flex; flex-direction: row">
-        <div class="col-md-2 mb-2" style="width: 9.666667%">
+    <div class="row">
+        <div class="col-md-auto mb-2">
             <a class="btn btn-outline-primary" href="{{ url('produtos/create') }}" role="button">
                 <i class="fa-light fa-plus fa-sm"></i> Cadastrar</a>
         </div>
-        <div class="col-md-2 mb-2" data-bs-toggle="modal" data-bs-target="#modalFilter">
+        <div class="col-md-auto mb-2" data-bs-toggle="modal" data-bs-target="#modalFilter">
             @if (count($produtos) > 0 && count($categorias) > 0)
                 <a class="btn btn-outline-secondary" role="button">
                     <i class="fa-light fa-filter"></i> Filtrar</a>
@@ -22,6 +22,13 @@
                     <i class="fa-light fa-filter"></i> Filtrar</a>
             @endif
         </div>
+        @if (request()->filled('categoria') && request('categoria') != 0)
+            <div class="col-md-auto ms-auto mb-2">
+                <a  href="{{url('produtos')}}" class="btn btn-outline-warning">
+                    <i class="fa-light fa-filter-slash"></i> Remover filtro
+                </a>
+            </div>
+        @endif
     </div>
     @csrf
     <table class="table table-bordered table-sm">
@@ -88,7 +95,7 @@
                 @endforeach
             @else
                 <tr class="text-center">
-                    <td colspan="7">Nenhum produto cadastrado</td>
+                    <td colspan="7">Nenhum produto encontrado</td>
                 </tr>
             @endif
         </tbody>
@@ -106,12 +113,9 @@
                             <div class="mb-3">
                                 <label for="recipient-name" class="col-form-label">Categoria</label>
                                 <select id="categoria" name="categoria" class="form-select">
-                                    <option value="0">Todas</option>
+                                    <option value="0" selected>Todas</option>
                                     @foreach ($categorias as $categoria)
-                                        <option value="{{ $categoria->id }}"
-                                            {{ $categoria->id === $produto->id_cat ? 'selected' : '' }}>
-                                            {{ $categoria->desc }}
-                                        </option>
+                                        <option value="{{ $categoria->id }}">{{ $categoria->desc }}</option>
                                     @endforeach
                                 </select>
                             </div>

@@ -33,12 +33,12 @@ class TransacaoController extends Controller
     public function index(Request $request)
     {
         if (($request->produto != '' && $request->produto != null && $request->produto != 'undefined' && $request->armazem != '' && $request->armazem != null && $request->armazem != 'undefined')  && ($request->armazem != '0' || $request->produto != '0')) {
-            if ($request->produto == '0') {
+            if ($request->produto === '0') {
                 $transacoes = DB::table('transacao')
                     ->where('dump', '!=', 1)
                     ->where('id_arm', $request->armazem)
                     ->get();
-            } else if ($request->armazem == '0') {
+            } else if ($request->armazem === '0') {
                 $transacoes = DB::table('transacao')
                     ->where('dump', '!=', 1)
                     ->where('id_itm', $request->produto)
@@ -165,6 +165,10 @@ class TransacaoController extends Controller
     {
         $idProd = $request->input('id_itm');
         $qtd = $request->input('qtd');
+
+        if($qtd <= 0){
+            return response()->json(['invalido' => true]);
+        }
 
         $disponivel = $this->verificarEstoque($idProd, $qtd);
         

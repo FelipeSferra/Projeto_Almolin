@@ -8,13 +8,13 @@
 @section('content')
     <h2>Transações</h2>
     <hr>
-    <div style="display: flex; flex-direction: row">
-        <div class="col-md-2 mb-2" style="width: 9.666667%">
+    <div class="row">
+        <div class="col-md-auto mb-2">
             <a class="btn btn-outline-primary" href="{{ url('transacao/create') }}" role="button">
                 <i class="fa-light fa-plus fa-sm"></i> Emprestar</a>
         </div>
 
-        <div class="col-md-2 mb-2" data-bs-toggle="modal" data-bs-target="#modalFilter">
+        <div class="col-md-auto mb-2" data-bs-toggle="modal" data-bs-target="#modalFilter">
             @if (count($produtos) > 0 && count($transacoes) > 0)
                 <a class="btn btn-outline-secondary" role="button">
                     <i class="fa-light fa-filter"></i> Filtrar</a>
@@ -23,6 +23,13 @@
                     <i class="fa-light fa-filter"></i> Filtrar</a>
             @endif
         </div>
+        @if ((request()->filled('produto') && request('produto') != 0) || (request()->filled('armazem') && request('armazem') != 0))
+            <div class="col-md-auto ms-auto">
+                <a href="{{ url('transacao') }}" class="btn btn-outline-warning">
+                    <i class="fa-light fa-filter-slash"></i> Remover filtro
+                </a>
+            </div>
+        @endif
     </div>
     @csrf
     <table class="table table-bordered table-sm text-center">
@@ -76,7 +83,7 @@
                 @endforeach
             @else
                 <tr>
-                    <td colspan="6"> Nenhuma transação cadastrada</td>
+                    <td colspan="6"> Nenhuma transação encontrada</td>
                 </tr>
             @endif
         </tbody>
@@ -135,21 +142,31 @@
                             <div class="mb-3">
                                 <label for="produto" class="col-form-label">Produto</label>
                                 <select id="produto" name="produto" class="form-select">
-                                    <option value="0">TODOS</option>
+                                    <option value="0" selected>TODOS</option>
                                     @foreach ($produtos as $produto)
-                                        <option value="{{ $produto->id }}"
-                                            {{ $produto->id === $transacao->id_itm ? 'selected' : '' }}>
-                                            {{ $produto->desc }}</option>
+                                        @foreach ($transacoes as $transacao)
+                                            @if ($transacao->id_itm === $produto->id)
+                                                <option value="{{ $produto->id }}">{{ $produto->desc }}</option>
+                                                @php
+                                                    break;
+                                                @endphp
+                                            @endif
+                                        @endforeach
                                     @endforeach
                                 </select>
 
                                 <label for="armazem" class="col-form-label">Armazem</label>
                                 <select id="armazem" name="armazem" class="form-select">
-                                    <option value="0">TODOS</option>
+                                    <option value="0" selected>TODOS</option>
                                     @foreach ($armazens as $armazem)
-                                        <option value="{{ $armazem->id }}"
-                                            {{ $armazem->id === $transacao->id_arm ? 'selected' : '' }}>
-                                            {{ $armazem->desc }}</option>
+                                        @foreach ($transacoes as $transacao)
+                                            @if ($transacao->id_arm === $armazem->id)
+                                                <option value="{{ $armazem->id }}">{{ $armazem->desc }}</option>
+                                                @php
+                                                    break;
+                                                @endphp
+                                            @endif
+                                        @endforeach
                                     @endforeach
                                 </select>
                             </div>

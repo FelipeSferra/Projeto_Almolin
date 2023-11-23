@@ -53,14 +53,21 @@ document.getElementById('formTran').addEventListener('submit', function (e) {
     }).then(
         function (response) {
             var disponivel = response.data.disponivel;
-
+            var invalido = response.data.invalido;
+            
             if (disponivel) {
                 document.getElementById('formTran').submit();
-            } else {
+            } else if (invalido) {
                 Swal.fire({
                     icon: "error",
                     title: "Oops...",
                     text: "A quantidade informada não é válida, tente novamente com outro valor.",
+                })
+            } else {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "A quantidade informada ultrapassa a quantidade em estoque, tente novamente com outro valor.",
                 })
             }
         }).catch(function (error) {
