@@ -19,8 +19,8 @@ class ArmazemMiddleware
         $allowedLevel = [2,3];
         if (!in_array(Auth::user()->level, $allowedLevel))
         {
-            return redirect()->back()->with('error',__('Desculpe, você não tem autorização para acessar essa página.'));
+            return $next($request);
         }
-        return $next($request);
+        return response()->view('errors.403');
     }
 }

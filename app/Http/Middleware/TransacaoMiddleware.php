@@ -17,10 +17,10 @@ class TransacaoMiddleware
     public function handle(Request $request, Closure $next)
     {
         $allowedLevel = [1,2,3];
-        if (!in_array(Auth::user()->level, $allowedLevel))
+        if (in_array(Auth::user()->level, $allowedLevel))
         {
-            return redirect()->back()->with('error',__('Desculpe, você não tem autorização para acessar essa página.'));
+            return $next($request);
         }
-        return $next($request);
+        return response()->view('errors.403');
     }
 }
