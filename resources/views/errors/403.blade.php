@@ -5,11 +5,14 @@
 @endsection
 
 @section('content')
-    <div id="app" onclick="window.history.back()">
-        <div>403</div>
-        <div class="txt">
-            Forbidden
+    <div class="row position-absolute top-50 start-50 translate-middle">
+        <div class="col-md-6 text-center">
+            <img src="{{ url('assets/img/sem_permissao.png') }}" class="img-fluid" style="width:90%"/>
         </div>
-        <p>Clique em qualquer lugar para retornar<span class="blink">_</span></p>
+        <div class="col-md-6 textP">
+            <h1>Sem permissão</h1>
+            <p >Você não tem acesso a essa página.</p>
+            <button class="btn btn-info mt-5" onclick="window.location='{{route('menu')}}'" style="color: #fff;"><i class="fa-light fa-rotate-left"></i> Página Inicial</button>
+        </div>
     </div>
 @endsection
